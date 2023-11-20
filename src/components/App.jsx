@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 import HomePage from '../pages/HomePage';
 import FavouritePage from 'pages/FavouritePage';

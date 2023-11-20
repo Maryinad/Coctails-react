@@ -20,12 +20,17 @@ export const Title = styled.h1`
 export const Text = styled.p`
   margin-bottom: 40px;
 `;
-export const Alphabet = styled.ul`
+
+export const DefaultListWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
+`;
+
+export const Alphabet = styled(DefaultListWrapper)`
   width: 520px;
 `;
-export const AlphabetElement = styled.li`
+
+export const DefaultElement = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,15 +38,6 @@ export const AlphabetElement = styled.li`
   height: 40px;
 `;
 
-export const Numbers = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
+export const Numbers = styled(DefaultListWrapper)`
   margin-left: 40px;
-`;
-export const NumberElement = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
 `;
