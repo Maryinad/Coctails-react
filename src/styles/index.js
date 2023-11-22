@@ -78,5 +78,4 @@ body {
   fill: #fcfcfc;
   transition: background-color 0.5s ease, color 0.5s ease, fill 0.5s ease;
 }
-
-
+`;

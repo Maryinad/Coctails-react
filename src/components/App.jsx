@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
 import HomePage from '../pages/HomePage';
@@ -7,6 +7,18 @@ import { ErrorPage } from 'pages/ErrorPage';
 import SearchResultPage from 'pages/SearchResultPage';
 
 export const App = () => {
+  const [favoriteCocktails, setFavoriteCocktails] = useState([]);
+
+  const handleAddToFavorite = (idDrink, strDrinkThumb, strDrink) => {
+    if (!favoriteCocktails.some(cocktail => cocktail.idDrink === idDrink)) {
+      setFavoriteCocktails([
+        ...favoriteCocktails,
+        { idDrink, strDrinkThumb, strDrink },
+      ]);
+    }
+    console.log('favoriteCocktailsF', favoriteCocktails);
+  };
+
   return (
     <main>
       <nav>
@@ -15,8 +27,14 @@ export const App = () => {
       </nav>
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/favourite" element={<FavouritePage />} />
+        <Route
+          path="/"
+          element={<HomePage onAddToFavorite={handleAddToFavorite} />}
+        />
+        <Route
+          path="/favourite"
+          element={<FavouritePage favoriteCocktails={favoriteCocktails} />}
+        />
         <Route path="/search/:id" element={<SearchResultPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
