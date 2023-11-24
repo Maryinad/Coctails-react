@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 
 export default function CocktailCard({
+  handleToggleModalOpen,
   idDrink,
   strDrinkThumb,
   strDrink,
   onAddToFavorite,
+  index,
 }) {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
   const handleAddClicked = () => {
     onAddToFavorite(idDrink, strDrinkThumb, strDrink);
-  };
-
-  const handleToggleModalOpen = event => {
-    setIsOpenModal(true);
   };
 
   return (
@@ -21,7 +17,7 @@ export default function CocktailCard({
       <li key={idDrink}>
         <img src={strDrinkThumb} alt={strDrink} width="200px" />
         <p>{strDrink}</p>
-        <button type="primary" onClick={handleToggleModalOpen}>
+        <button type="primary" onClick={() => handleToggleModalOpen(index)}>
           Learn more
         </button>
         <button type="primary" onClick={handleAddClicked}>

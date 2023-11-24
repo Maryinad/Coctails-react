@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { MdClose } from 'react-icons/md';
-import { createPortal } from 'react-dom';
-import { Link } from 'react-router-dom';
 
-export default function Modal({ onClose }) {
+export default function Modal({ onClose, data }) {
   const onBackdropClick = event => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -19,17 +17,12 @@ export default function Modal({ onClose }) {
 
     window.addEventListener('keydown', onEscapeClick);
 
-    //__________________ Где она должна быть?
-    // мне нужно обновить стейт в фаворит пейдж и удалить коктейль оттуда
-
-    const handleRemoveFromFavorite = () => {};
-
     return () => {
       window.removeEventListener('keydown', onEscapeClick);
     };
-  }, [onClose]);
+  }, [onClose, data]);
 
-  return createPortal(
+  return (
     <div onClick={onBackdropClick}>
       <div>
         <button type="button">
@@ -39,25 +32,25 @@ export default function Modal({ onClose }) {
           />
         </button>
         <div>
-          <img></img>
+          <img src={data.strDrinkThumb} alt={data.strDrinkThumb}></img>
           <div>
-            <h2>{}name</h2>
-            <h3>Ingridiens</h3>
+            <h2>{data.strDrink}</h2>
+            <h3>Ingrеdiens</h3>
             <p>Per cocktail</p>
             <ul>
-              <li></li>
+              <li>{data.strIngredient1}</li>
+              <li>{data.strIngredient2}</li>
             </ul>
           </div>
         </div>
         <div>
           <p>Instructions:</p>
-          <p></p>
+          <p>{data.strInstructions}</p>
         </div>
-        <button type="primary" onClick={handleRemoveFromFavorite}>
-          Remove from favorite
-        </button>
+        <button type="primary">Remove from favorite</button>
       </div>
-    </div>,
-    document.getElementById('modal')
+    </div>
   );
 }
+
+// onClick = { handleRemoveFromFavorite };

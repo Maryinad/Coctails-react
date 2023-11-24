@@ -9,13 +9,25 @@ export default function HomePage({ onAddToFavorite }) {
   const [error, setError] = useState('');
   const [cocktails, setCocktails] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [selectedCoc, setSelectedCoc] = useState({});
+
+  let idDrink = '';
+  let strDrinkThumb = '';
+  let strDrink = '';
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const randomCocktailsResult = await getRandomCocktails();
-        console.log('randomCocktailsResult', randomCocktailsResult);
-        setCocktails(randomCocktailsResult);
+        const randomCocktailsResult1 = await getRandomCocktails();
+        const randomCocktailsResult2 = await getRandomCocktails();
+        const randomCocktailsResult3 = await getRandomCocktails();
+
+        setCocktails([
+          randomCocktailsResult1[0],
+          randomCocktailsResult2[0],
+          randomCocktailsResult3[0],
+        ]);
+
         setLoading(false);
       } catch (error) {
         alert('Ooops, something went wrong');
@@ -27,8 +39,17 @@ export default function HomePage({ onAddToFavorite }) {
     fetchData();
   }, []);
 
-  const handleToggleModalOpen = event => {
+  const handleToggleModalOpen = index => {
+    const selectedCocktail = cocktails[index];
+
+    setSelectedCoc({
+      id: selectedCocktail.idDrink,
+      strDrinkThumb: selectedCocktail.strDrinkThumb,
+      strDrink: selectedCocktail.strDrink,
+    });
+
     setIsOpenModal(true);
+    console.log('setSelectedCoc', selectedCoc);
   };
 
   const onClose = () => {
@@ -41,11 +62,12 @@ export default function HomePage({ onAddToFavorite }) {
       <Hero />
       {cocktails && cocktails.length !== 0 && (
         <CocktailList
+          handleToggleModalOpen={handleToggleModalOpen}
           randomCocktailsData={cocktails}
           onAddToFavorite={onAddToFavorite}
         />
       )}
-      <Modal cocktailsData={cocktails} onClose={onClose} />
+      {isOpenModal && <Modal onClose={onClose} data={selectedCoc} />}
     </>
   );
 }
