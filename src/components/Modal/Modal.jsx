@@ -1,16 +1,30 @@
 import React, { useEffect } from 'react';
 import { MdClose } from 'react-icons/md';
 
-export default function Modal({ onClose, data }) {
+export default function Modal({ onClose, data, onAddToFavorite }) {
+  console.log('data', data);
   const onBackdropClick = event => {
     if (event.target === event.currentTarget) {
       onClose();
     }
   };
 
+  const handleAddClicked = () => {
+    const { idDrink, strDrinkThumb, strDrink, strInstructions, strIngredient } =
+      data || {};
+
+    onAddToFavorite(
+      idDrink,
+      strDrinkThumb,
+      strDrink,
+      strInstructions,
+      strIngredient
+    );
+  };
+
   useEffect(() => {
     const onEscapeClick = event => {
-      if (event.code === 'Escape') {
+      if (event.key === 'Escape') {
         onClose();
       }
     };
@@ -32,14 +46,21 @@ export default function Modal({ onClose, data }) {
           />
         </button>
         <div>
-          <img src={data.strDrinkThumb} alt={data.strDrinkThumb}></img>
+          <img
+            src={data?.strDrinkThumb}
+            alt={data?.strDrinkThumb}
+            width="200px"
+          ></img>
           <div>
-            <h2>{data.strDrink}</h2>
+            <h2>{data?.strDrink}</h2>
             <h3>Ingrеdiens</h3>
             <p>Per cocktail</p>
             <ul>
-              <li>{data.strIngredient1}</li>
-              <li>{data.strIngredient2}</li>
+              {data &&
+                data.strIngredient &&
+                data.strIngredient.map((ingredient, index) => (
+                  <li key={index}>🔸 {ingredient}</li>
+                ))}
             </ul>
           </div>
         </div>
@@ -47,7 +68,9 @@ export default function Modal({ onClose, data }) {
           <p>Instructions:</p>
           <p>{data.strInstructions}</p>
         </div>
-        <button type="primary">Remove from favorite</button>
+        <button type="primary" onClick={handleAddClicked}>
+          Add to favorite
+        </button>
       </div>
     </div>
   );

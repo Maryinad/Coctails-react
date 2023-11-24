@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export default function CocktailCard({
   handleToggleModalOpen,
@@ -15,12 +15,12 @@ export default function CocktailCard({
   return (
     <ul>
       <li key={idDrink}>
-        <img src={strDrinkThumb} alt={strDrink} width="200px" />
+        <img src={strDrinkThumb} alt={strDrink} width="365px" />
         <p>{strDrink}</p>
-        <button type="primary" onClick={() => handleToggleModalOpen(index)}>
+        <button type="button" onClick={() => handleToggleModalOpen(index)}>
           Learn more
         </button>
-        <button type="primary" onClick={handleAddClicked}>
+        <button type="button" onClick={handleAddClicked}>
           Add to 💙
         </button>
       </li>
