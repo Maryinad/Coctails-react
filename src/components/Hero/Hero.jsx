@@ -1,11 +1,10 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
+
 import heroImage from '../../images/hero/coctail/heroImage.png';
 import {
   Alphabet,
-  AlphabetElement,
   Container,
-  NumberElement,
+  DefaultElement,
   Numbers,
   Text,
   Title,
@@ -51,17 +50,17 @@ export default function Hero() {
           <Text>Search your favorite cocktail by ABC </Text>
           <Alphabet>
             {englishAlphabet.map(letter => {
-              return <AlphabetElement key={nanoid()}>{letter}</AlphabetElement>;
+              return <DefaultElement key={letter}>{letter}</DefaultElement>;
             })}
           </Alphabet>
           <Numbers>
             {numbers.map(number => (
-              <NumberElement key={nanoid()}>{number}</NumberElement>
+              <DefaultElement key={number}>{number}</DefaultElement>
             ))}
           </Numbers>
         </div>
 
-        <img src={heroImage}></img>
+        <img src={heroImage} alt="cocktail"></img>
       </Container>
     </div>
   );

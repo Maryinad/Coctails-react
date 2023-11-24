@@ -1,8 +1,12 @@
-@import-normalize; /* bring in normalize.css styles */
+import { createGlobalStyle } from 'styled-components';
+import { normalize } from 'styled-normalize';
 
-@import '../src/styles/_btn.scss';
-@import '../src/styles/_container.scss';
-@import '../src/styles/_vars.scss';
+export const GlobalStyle = createGlobalStyle`
+  ${normalize}
+
+  
+
+
 
 *, *: : before, *: : after {
   box-sizing: border-box;
@@ -74,3 +78,4 @@ body {
   fill: #fcfcfc;
   transition: background-color 0.5s ease, color 0.5s ease, fill 0.5s ease;
 }
+`;
