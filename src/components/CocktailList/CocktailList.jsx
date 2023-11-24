@@ -1,5 +1,6 @@
 import React from 'react';
 import CocktailCard from './CocktailCard';
+import { Container } from './CocktailList.styled';
 
 export default function CocktailList({
   handleToggleModalOpen,
@@ -9,7 +10,7 @@ export default function CocktailList({
 }) {
   console.log('randomCocktailsData', randomCocktailsData);
   return (
-    <div>
+    <Container>
       {randomCocktailsData.map((cocktail, index) => (
         <CocktailCard
           key={cocktail.idDrink}
@@ -19,6 +20,6 @@ export default function CocktailList({
           index={index}
         />
       ))}
-    </div>
+    </Container>
   );
 }

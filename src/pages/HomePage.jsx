@@ -1,19 +1,18 @@
 import CocktailList from 'components/CocktailList/CocktailList';
 import Hero from 'components/Hero/Hero';
 import Modal from 'components/Modal/Modal';
-import React, { useEffect, useState } from 'react';
-import { getRandomCocktails } from 'utils/Api';
+import React, { useEffect, useRef, useState } from 'react';
+import { getRandomCocktails, getRandomCocktailsByLetter } from 'utils/Api';
 
 export default function HomePage({ onAddToFavorite }) {
+  const currentLetter = useRef('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [cocktails, setCocktails] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [selectedCoc, setSelectedCoc] = useState({});
-
-  let idDrink = '';
-  let strDrinkThumb = '';
-  let strDrink = '';
+  const [selectedLetter, setSelectedLetter] = useState('');
+  const [selectedNumber, setSelectedNumber] = useState('');
 
   useEffect(() => {
     async function fetchData() {
@@ -39,13 +38,47 @@ export default function HomePage({ onAddToFavorite }) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        if (selectedLetter || selectedNumber) {
+          const response = await getRandomCocktailsByLetter(
+            selectedLetter ? selectedLetter : selectedNumber
+          );
+          console.log('responseSelectLet', response);
+          const cocktailsResult = response.drinks;
+
+          setCocktails(cocktailsResult);
+          setLoading(false);
+          currentLetter.current = selectedLetter;
+        }
+      } catch (error) {
+        alert('Ooops, something went wrong');
+        setError(error.message);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [selectedLetter, selectedNumber]);
+
   const handleToggleModalOpen = index => {
     const selectedCocktail = cocktails[index];
+
+    const ingredients = [];
+    for (let i = 1; i <= 15; i++) {
+      const ingredient = selectedCocktail[`strIngredient${i}`];
+      if (ingredient) {
+        ingredients.push(ingredient);
+      }
+    }
 
     setSelectedCoc({
       id: selectedCocktail.idDrink,
       strDrinkThumb: selectedCocktail.strDrinkThumb,
       strDrink: selectedCocktail.strDrink,
+      strInstructions: selectedCocktail.strInstructions,
+      strIngredient: ingredients,
     });
 
     setIsOpenModal(true);
@@ -59,7 +92,10 @@ export default function HomePage({ onAddToFavorite }) {
 
   return (
     <>
-      <Hero />
+      <Hero
+        onAlphabetClick={setSelectedLetter}
+        onNumbersClick={setSelectedNumber}
+      />
       {cocktails && cocktails.length !== 0 && (
         <CocktailList
           handleToggleModalOpen={handleToggleModalOpen}
@@ -67,7 +103,14 @@ export default function HomePage({ onAddToFavorite }) {
           onAddToFavorite={onAddToFavorite}
         />
       )}
-      {isOpenModal && <Modal onClose={onClose} data={selectedCoc} />}
+
+      {isOpenModal && (
+        <Modal
+          onClose={onClose}
+          data={selectedCoc}
+          onAddToFavorite={onAddToFavorite}
+        />
+      )}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import heroImage from '../../images/hero/coctail/heroImage.png';
 import {
@@ -41,7 +41,28 @@ const englishAlphabet = [
 
 const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
-export default function Hero() {
+export default function Hero({ onAlphabetClick, onNumbersClick }) {
+  const [selectedLetter, setSelectedLetter] = useState('');
+  const [selectedNumber, setSelectedNumber] = useState('');
+
+  const handleAlphabetClick = letter => {
+    setSelectedLetter(letter);
+
+    onAlphabetClick(letter);
+  };
+
+  const handleNumbersClick = number => {
+    setSelectedNumber(number);
+    onNumbersClick(number);
+  };
+
+  useEffect(() => {
+    const selectedValue = selectedLetter || selectedNumber;
+    if (selectedValue) {
+      onAlphabetClick(selectedValue);
+    }
+  }, [selectedLetter, selectedNumber, onAlphabetClick, onNumbersClick]);
+
   return (
     <div>
       <Container>
@@ -49,13 +70,25 @@ export default function Hero() {
           <Title>A party without cocktails is not like a party</Title>
           <Text>Search your favorite cocktail by ABC </Text>
           <Alphabet>
-            {englishAlphabet.map(letter => {
-              return <DefaultElement key={letter}>{letter}</DefaultElement>;
-            })}
+            {englishAlphabet.map(letter => (
+              <DefaultElement
+                key={letter}
+                onClick={() => handleAlphabetClick(letter)}
+                selected={selectedLetter === letter}
+              >
+                {letter}
+              </DefaultElement>
+            ))}
           </Alphabet>
           <Numbers>
             {numbers.map(number => (
-              <DefaultElement key={number}>{number}</DefaultElement>
+              <DefaultElement
+                key={number}
+                onClick={() => handleNumbersClick(number)}
+                selected={selectedNumber === number}
+              >
+                {number}
+              </DefaultElement>
             ))}
           </Numbers>
         </div>
