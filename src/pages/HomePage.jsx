@@ -1,6 +1,7 @@
 import CocktailList from 'components/CocktailList/CocktailList';
 import Hero from 'components/Hero/Hero';
 import Modal from 'components/Modal/Modal';
+import Navbar from 'components/NavBar';
 import React, { useEffect, useRef, useState } from 'react';
 import { getRandomCocktails, getRandomCocktailsByLetter } from 'utils/Api';
 
