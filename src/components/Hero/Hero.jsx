@@ -41,27 +41,11 @@ const englishAlphabet = [
 
 const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
-export default function Hero({ onAlphabetClick, onNumbersClick }) {
-  const [selectedLetter, setSelectedLetter] = useState('');
-  const [selectedNumber, setSelectedNumber] = useState('');
-
-  const handleAlphabetClick = letter => {
-    setSelectedLetter(letter);
-
-    onAlphabetClick(letter);
+export default function Hero({ setSelectedChar, getCocktails, previousChar }) {
+  const handleCharChange = newChar => {
+    setSelectedChar(newChar);
+    getCocktails(newChar, previousChar);
   };
-
-  const handleNumbersClick = number => {
-    setSelectedNumber(number);
-    onNumbersClick(number);
-  };
-
-  useEffect(() => {
-    const selectedValue = selectedLetter || selectedNumber;
-    if (selectedValue) {
-      onAlphabetClick(selectedValue);
-    }
-  }, [selectedLetter, selectedNumber, onAlphabetClick, onNumbersClick]);
 
   return (
     <div>
@@ -73,8 +57,7 @@ export default function Hero({ onAlphabetClick, onNumbersClick }) {
             {englishAlphabet.map(letter => (
               <DefaultElement
                 key={letter}
-                onClick={() => handleAlphabetClick(letter)}
-                selected={selectedLetter === letter}
+                onClick={e => handleCharChange(e.target.outerText)}
               >
                 {letter}
               </DefaultElement>
@@ -84,8 +67,7 @@ export default function Hero({ onAlphabetClick, onNumbersClick }) {
             {numbers.map(number => (
               <DefaultElement
                 key={number}
-                onClick={() => handleNumbersClick(number)}
-                selected={selectedNumber === number}
+                onClick={e => handleCharChange(e.target.outerText)}
               >
                 {number}
               </DefaultElement>

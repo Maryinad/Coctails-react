@@ -1,22 +1,32 @@
 import CocktailList from 'components/CocktailList/CocktailList';
 import Hero from 'components/Hero/Hero';
 import Modal from 'components/Modal/Modal';
-import React, { useEffect, useRef, useState } from 'react';
+import Navbar from 'components/NavBar';
+import React, { useEffect, useState } from 'react';
 import { getRandomCocktails, getRandomCocktailsByLetter } from 'utils/Api';
 
-export default function HomePage({ onAddToFavorite }) {
-  const currentLetter = useRef('');
+export default function HomePage({ onAddToFavorite, searchedCocktails }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [cocktails, setCocktails] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [selectedCoc, setSelectedCoc] = useState({});
-  const [selectedLetter, setSelectedLetter] = useState('');
-  const [selectedNumber, setSelectedNumber] = useState('');
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
+  const [selectedChar, setSelectedChar] = useState('');
+  const [previousChar, setPreviousChar] = useState('');
+
+  const getCocktails = async (newChar, oldChar) => {
+    try {
+      if (newChar !== oldChar) {
+        setPreviousChar(newChar);
+        if (newChar) {
+          const response = await getRandomCocktailsByLetter(newChar);
+          console.log('responseSelectLet', response);
+          const cocktailsResult = response.drinks;
+          setCocktails(cocktailsResult);
+          // setLoading(false);
+        }
+      } else {
         const randomCocktailsResult1 = await getRandomCocktails();
         const randomCocktailsResult2 = await getRandomCocktails();
         const randomCocktailsResult3 = await getRandomCocktails();
@@ -26,41 +36,40 @@ export default function HomePage({ onAddToFavorite }) {
           randomCocktailsResult2[0],
           randomCocktailsResult3[0],
         ]);
-
-        setLoading(false);
-      } catch (error) {
-        alert('Ooops, something went wrong');
-        setError(error.message);
-      } finally {
-        setLoading(false);
       }
+    } catch (error) {
+      alert('Ooops, something went wrong');
+      setError(error.message);
+      setLoading(false);
     }
-    fetchData();
-  }, []);
+  };
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const randomCocktailsResult1 = await getRandomCocktails();
+  //       const randomCocktailsResult2 = await getRandomCocktails();
+  //       const randomCocktailsResult3 = await getRandomCocktails();
+
+  //       setCocktails([
+  //         randomCocktailsResult1[0],
+  //         randomCocktailsResult2[0],
+  //         randomCocktailsResult3[0],
+  //       ]);
+
+  //       setLoading(false);
+  //     } catch (error) {
+  //       alert('Ooops, something went wrong');
+  //       setError(error.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        if (selectedLetter || selectedNumber) {
-          const response = await getRandomCocktailsByLetter(
-            selectedLetter ? selectedLetter : selectedNumber
-          );
-          console.log('responseSelectLet', response);
-          const cocktailsResult = response.drinks;
-
-          setCocktails(cocktailsResult);
-          setLoading(false);
-          currentLetter.current = selectedLetter;
-        }
-      } catch (error) {
-        alert('Ooops, something went wrong');
-        setError(error.message);
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, [selectedLetter, selectedNumber]);
+    getCocktails(selectedChar, previousChar);
+  }, []);
 
   const handleToggleModalOpen = index => {
     const selectedCocktail = cocktails[index];
@@ -93,10 +102,17 @@ export default function HomePage({ onAddToFavorite }) {
   return (
     <>
       <Hero
-        onAlphabetClick={setSelectedLetter}
-        onNumbersClick={setSelectedNumber}
+        setSelectedChar={setSelectedChar}
+        getCocktails={getCocktails}
+        previousChar={previousChar}
       />
-      {cocktails && cocktails.length !== 0 && (
+      {searchedCocktails && searchedCocktails.length !== 0 ? (
+        <CocktailList
+          handleToggleModalOpen={handleToggleModalOpen}
+          randomCocktailsData={searchedCocktails}
+          onAddToFavorite={onAddToFavorite}
+        />
+      ) : (
         <CocktailList
           handleToggleModalOpen={handleToggleModalOpen}
           randomCocktailsData={cocktails}
