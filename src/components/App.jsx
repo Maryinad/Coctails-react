@@ -10,6 +10,7 @@ import { Box } from '@mui/material';
 
 export const App = () => {
   const [favoriteCocktails, setFavoriteCocktails] = useState([]);
+  const [searchedCocktails, setSearchedCocktails] = useState([]);
 
   const handleAddToFavorite = (idDrink, strDrinkThumb, strDrink) => {
     if (!favoriteCocktails.some(cocktail => cocktail.idDrink === idDrink)) {
@@ -29,12 +30,17 @@ export const App = () => {
       </nav> */}
 
       <Box width="400px" sx={{ width: { xl: '1488px' } }} m="auto">
-        <Navbar />
+        <Navbar setSearchedCocktails={setSearchedCocktails} />
 
         <Routes>
           <Route
             path="/"
-            element={<HomePage onAddToFavorite={handleAddToFavorite} />}
+            element={
+              <HomePage
+                onAddToFavorite={handleAddToFavorite}
+                searchedCocktails={searchedCocktails}
+              />
+            }
           />
           <Route
             path="/favourite"

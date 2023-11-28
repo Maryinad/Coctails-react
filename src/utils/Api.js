@@ -11,8 +11,8 @@ export async function getRandomCocktails() {
   return randomCocktails;
 }
 
-export async function getRandomCocktailsByLetter(letter) {
-  const response = await axios.get(`${BASE_URL}/search.php?f=${letter}`);
+export async function getRandomCocktailsByLetter(char) {
+  const response = await axios.get(`${BASE_URL}/search.php?f=${char}`);
   const cocktails = response.data;
   return cocktails;
 }

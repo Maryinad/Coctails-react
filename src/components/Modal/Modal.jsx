@@ -1,5 +1,7 @@
+import { Backdrop } from '@mui/material';
 import React, { useEffect } from 'react';
 import { MdClose } from 'react-icons/md';
+import { CloseBtn } from './Modal.styled';
 
 export default function Modal({ onClose, data, onAddToFavorite }) {
   console.log('data', data);
@@ -51,6 +53,7 @@ export default function Modal({ onClose, data, onAddToFavorite }) {
             alt={data?.strDrinkThumb}
             width="200px"
           ></img>
+
           <div>
             <h2>{data?.strDrink}</h2>
             <h3>Ingrеdiens</h3>

@@ -1,17 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png';
-import {
-  AppBar,
-  Menu,
-  Toolbar,
-  Typography,
-  Search,
-  InputBase,
-} from '@mui/material';
+import { AppBar, Menu, Toolbar, Typography, InputBase } from '@mui/material';
 import styled from '@emotion/styled';
 import { useMediaQuery } from 'react-responsive';
-import { MdPolicy, MdSearch } from 'react-icons/md';
+import { MdSearch } from 'react-icons/md';
+import SearchForm from './SearchForm/SearchForm';
 
 const StyledToolBar = styled(Toolbar)({
   display: 'flex',
@@ -23,16 +17,16 @@ const Container = styled('div')({
   gap: '43px',
   justifyContent: 'space-between',
 });
-const SearchBar = styled('div')({
-  backgroundColor: 'inherit',
-  color: 'black',
-  width: '288px',
-  height: '40px',
-  borderRadius: '4px',
-  border: '1px solid  #FD5103',
-});
+// const SearchBar = styled('div')({
+//   backgroundColor: 'inherit',
+//   color: 'black',
+//   width: '288px',
+//   height: '40px',
+//   borderRadius: '4px',
+//   border: '1px solid  #FD5103',
+// });
 
-const Navbar = () => {
+const Navbar = ({ setSearchedCocktails }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
   const isDefault = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -57,8 +51,9 @@ const Navbar = () => {
             <Link to="/favourite">Favourite</Link>
           </div>
         </Container>
+        <SearchForm setSearchedCocktails={setSearchedCocktails} />
 
-        <SearchBar>
+        {/* <SearchBar>
           <MdSearch
             sx={{
               width: '24px',
@@ -68,7 +63,7 @@ const Navbar = () => {
             }}
           />
           <InputBase placeholder="search" />
-        </SearchBar>
+        </SearchBar> */}
         <Typography
           variant="h6"
           sx={{ display: { xs: 'none', sm: 'block' }, color: 'black' }}
