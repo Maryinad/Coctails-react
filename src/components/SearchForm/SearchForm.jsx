@@ -10,7 +10,19 @@ const SearchBar = styled('div')({
   width: '288px',
   height: '40px',
   borderRadius: '4px',
-  border: '1px solid  #FD5103',
+  border: '1px solid #FD5103',
+  display: 'flex',
+  alignItems: 'center',
+
+  '@media screen and (max-width: 767px)': {
+    display: 'none',
+  },
+});
+
+const SearchBtn = styled('button')({
+  backgroundColor: '#FFFFFF',
+  color: '#FD5103',
+  border: 'none',
 });
 
 export default function SearchForm({ setSearchedCocktails }) {
@@ -43,7 +55,7 @@ export default function SearchForm({ setSearchedCocktails }) {
   return (
     <div>
       <SearchBar>
-        <button onClick={handleSearch}>
+        <SearchBtn onClick={handleSearch}>
           <MdSearch
             sx={{
               width: '24px',
@@ -52,7 +64,7 @@ export default function SearchForm({ setSearchedCocktails }) {
               padding: '8px',
             }}
           />
-        </button>
+        </SearchBtn>
         <InputBase
           type="text"
           placeholder="search"

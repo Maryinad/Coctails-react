@@ -9,7 +9,7 @@ export const CardContainer = styled.li`
 
   @media screen and (min-width: 767px) {
     flex-basis: calc((100% - 32px) / 2);
-    /* width: 335px; */
+    width: 335px;
   }
   @media screen and (min-width: 1200px) {
     flex-basis: calc((100% - 64px) / 3);
@@ -67,6 +67,10 @@ export const ButtonMain = styled.button`
 export const ButtonBase = styled(ButtonMain)`
   background: #fff;
   border: 1px solid #fd5103;
+  &:active {
+    background: #fd5103;
+    color: #fff;
+  }
 `;
 
 export const BtnMainText = styled.button`

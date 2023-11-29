@@ -22,6 +22,16 @@ const Container = styled('div')({
   justifyContent: 'space-between',
 });
 
+const Nav = styled('div')({
+  display: 'flex',
+  gap: '20px',
+  color: '#202025',
+
+  '@media screen and (max-width: 1200px)': {
+    display: 'none',
+  },
+});
+
 const Navbar = ({ setSearchedCocktails }) => {
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
   const isDefault = useMediaQuery({ query: '(min-width: 768px)' });
@@ -46,26 +56,31 @@ const Navbar = ({ setSearchedCocktails }) => {
                 <img src={logo} alt="logo" height={43} width={156} />
               )}
             </Link>
-            <div>
+            <Nav>
               <Link to="/">Home</Link>
               <Link to="/favourite">Favourite</Link>
-            </div>
+            </Nav>
           </Container>
+
           <SearchForm setSearchedCocktails={setSearchedCocktails} />
 
           <Typography
             variant="h6"
-            sx={{ display: { xs: 'none', sm: 'block' }, color: 'black' }}
+            sx={{
+              display: { xs: 'none', sm: 'none', lg: 'block' },
+              color: 'black',
+            }}
           >
             Theme
           </Typography>
 
           <MenuIcon
             sx={{
-              display: { xs: 'block', sm: 'none' },
+              display: { xs: 'block', sm: 'block', lg: 'none' },
               color: 'black',
               height: '16px',
               width: '30px',
+              backgroundColor: '#FFF',
             }}
           />
         </StyledToolBar>
