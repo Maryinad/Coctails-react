@@ -39,12 +39,12 @@ export default function FavouritePage({
                 width="200px"
               />
               <p>{cocktail.strDrink}</p>
-              <button
+              {/* <button
                 type="button"
                 onClick={() => handleToggleModalOpen(cocktail.idDrink)}
               >
                 Learn more
-              </button>
+              </button> */}
               <button
                 type="primary "
                 onClick={() => handleRemoveFromFavorite(cocktail.idDrink)}

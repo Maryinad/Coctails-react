@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import heroImage from '../../images/hero/coctail/heroImage.png';
 import {
   Alphabet,
   Container,
   DefaultElement,
+  Image,
   Numbers,
   Text,
   Title,
+  WrapperAlp,
 } from './Hero.styled';
 
 const englishAlphabet = [
@@ -53,6 +55,7 @@ export default function Hero({ setSelectedChar, getCocktails, previousChar }) {
         <div>
           <Title>A party without cocktails is not like a party</Title>
           <Text>Search your favorite cocktail by ABC </Text>
+
           <Alphabet>
             {englishAlphabet.map(letter => (
               <DefaultElement
@@ -75,7 +78,7 @@ export default function Hero({ setSelectedChar, getCocktails, previousChar }) {
           </Numbers>
         </div>
 
-        <img src={heroImage} alt="cocktail"></img>
+        <Image src={heroImage} alt="cocktail"></Image>
       </Container>
     </div>
   );

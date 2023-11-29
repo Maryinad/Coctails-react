@@ -49,6 +49,65 @@ export const ButtonClose = styled.button`
   align-items: center;
 `;
 
+export const Wrapper = styled.div`
+  display: flex;
+  gap: 32px;
+  margin-bottom: 15px;
+`;
+
+export const Name = styled.h2`
+  color: #000917;
+  font-family: Roboto;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 900;
+  margin-bottom: 14px;
+`;
+
+export const Title = styled.h3`
+  color: #000917;
+  margin-bottom: 12px;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+`;
+
+export const Text = styled.p`
+  color: #202025;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+`;
+
+export const Item = styled.li`
+  color: #5f6775;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+`;
+
+export const WrapperInstr = styled.div`
+  margin-bottom: 10px;
+`;
+
+export const Instructions = styled.p`
+  color: #5f6775;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+`;
+
+export const ButtonAdd = styled.button`
+  padding: 12px 24px;
+  border-radius: 4px;
+  background: #fd5103;
+  border: none;
+`;
+
 // .backdrop.is-hidden {
 //   opacity: 0;
 //   visibility: hidden;
