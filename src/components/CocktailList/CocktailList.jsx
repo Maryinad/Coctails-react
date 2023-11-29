@@ -1,6 +1,7 @@
 import React from 'react';
 import CocktailCard from './CocktailCard';
 import { Container } from './CocktailList.styled';
+// import { Container } from '@mui/material';
 
 export default function CocktailList({
   handleToggleModalOpen,
@@ -11,7 +12,7 @@ export default function CocktailList({
   console.log('randomCocktailsData', randomCocktailsData);
   return (
     <Container>
-      {randomCocktailsData.map((cocktail, index) => (
+      {randomCocktailsData.slice(0, 9).map((cocktail, index) => (
         <CocktailCard
           key={cocktail.idDrink}
           {...cocktail}

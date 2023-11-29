@@ -1,16 +1,17 @@
-import { Backdrop } from '@mui/material';
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { MdClose } from 'react-icons/md';
-import { CloseBtn } from './Modal.styled';
+import { Backdrop, ButtonClose, ModalWrap } from './Modal.styled';
 
-export default function Modal({ onClose, data, onAddToFavorite }) {
-  console.log('data', data);
-  const onBackdropClick = event => {
-    if (event.target === event.currentTarget) {
-      onClose();
-    }
-  };
+const modalRoot = document.getElementById('modal');
 
+export default function Modal({
+  onClose,
+  data,
+  onAddToFavorite,
+  currentPage,
+  handleRemoveFromFavorite,
+}) {
   const handleAddClicked = () => {
     const { idDrink, strDrinkThumb, strDrink, strInstructions, strIngredient } =
       data || {};
@@ -22,6 +23,12 @@ export default function Modal({ onClose, data, onAddToFavorite }) {
       strInstructions,
       strIngredient
     );
+  };
+
+  const onBackdropClick = event => {
+    if (event.target === event.currentTarget) {
+      onClose();
+    }
   };
 
   useEffect(() => {
@@ -38,15 +45,17 @@ export default function Modal({ onClose, data, onAddToFavorite }) {
     };
   }, [onClose, data]);
 
-  return (
-    <div onClick={onBackdropClick}>
-      <div>
-        <button type="button">
+  console.log('data', data);
+
+  return createPortal(
+    <Backdrop onClick={onBackdropClick}>
+      <ModalWrap>
+        <ButtonClose type="button">
           <MdClose
             style={{ width: 20, height: 20 }}
             onClick={() => onClose()}
           />
-        </button>
+        </ButtonClose>
         <div>
           <img
             src={data?.strDrinkThumb}
@@ -71,12 +80,20 @@ export default function Modal({ onClose, data, onAddToFavorite }) {
           <p>Instructions:</p>
           <p>{data.strInstructions}</p>
         </div>
-        <button type="primary" onClick={handleAddClicked}>
-          Add to favorite
-        </button>
-      </div>
-    </div>
+        {currentPage === 'home' ? (
+          <button type="primary" onClick={handleAddClicked}>
+            Add to favorite 💙
+          </button>
+        ) : (
+          <button
+            type="primary"
+            onClick={() => handleRemoveFromFavorite(data.id)}
+          >
+            Remove from favourite 💙
+          </button>
+        )}
+      </ModalWrap>
+    </Backdrop>,
+    document.getElementById('modal')
   );
 }
-
-// onClick = { handleRemoveFromFavorite };
