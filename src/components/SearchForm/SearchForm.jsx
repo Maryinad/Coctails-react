@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MdSearch } from 'react-icons/md';
 import { InputBase } from '@mui/material';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import { getCocktailByName } from 'utils/Api';
 
 const SearchBar = styled('div')({

@@ -22,3 +22,7 @@ export const Wrapper = styled.div`
     width: 1248px;
   }
 `;
+
+export const StyledLink = styled.span`
+  color: #202025;
+`;

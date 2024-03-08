@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 
 const Container = styled.div`
-  background-color: #fd5103;
+  background-color: ${props => props.theme.background};
   height: 110px;
   position: fixed;
   bottom: 0;
