@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
-import { AppBar, Toolbar, Typography, InputBase } from '@mui/material';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 
 import MenuIcon from '@mui/icons-material/Menu';
-import styled from '@emotion/styled';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
-import { MdSearch } from 'react-icons/md';
 import SearchForm from '../SearchForm/SearchForm';
-import { Wrapper } from './NavBar.styled';
+import { StyledLink, Wrapper } from './NavBar.styled';
+import { Switch } from '@mui/material';
 
 const StyledToolBar = styled(Toolbar)({
   display: 'flex',
@@ -30,6 +32,13 @@ const Nav = styled('div')({
   '@media screen and (max-width: 1200px)': {
     display: 'none',
   },
+});
+
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+const StyledSwitch = styled(Switch)({
+  background: '#fd5103',
+  display: { xs: 'none', sm: 'none', lg: 'block' },
 });
 
 const Navbar = ({ setSearchedCocktails }) => {
@@ -57,7 +66,9 @@ const Navbar = ({ setSearchedCocktails }) => {
               )}
             </Link>
             <Nav>
-              <Link to="/">Home</Link>
+              <StyledLink>
+                <Link to="/">Home</Link>
+              </StyledLink>
               <Link to="/favourite">Favourite</Link>
             </Nav>
           </Container>
@@ -70,9 +81,24 @@ const Navbar = ({ setSearchedCocktails }) => {
               display: { xs: 'none', sm: 'none', lg: 'block' },
               color: 'black',
             }}
-          >
-            Theme
-          </Typography>
+          ></Typography>
+          <WbSunnyIcon
+            sx={{
+              color: '#fd5103',
+              height: '40px',
+              width: '40px',
+              display: { xs: 'none', sm: 'none', lg: 'block' },
+            }}
+          />
+          <StyledSwitch {...label} />
+          <DarkModeIcon
+            sx={{
+              color: '#fd5103',
+              height: '40px',
+              width: '40px',
+              display: { xs: 'none', sm: 'none', lg: 'block' },
+            }}
+          />
 
           <MenuIcon
             sx={{
