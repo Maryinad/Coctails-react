@@ -9,11 +9,21 @@ const StyledBox = styled(Box)({
   zIndex: '1000',
 });
 
-export default function Header({ setSearchedCocktails }) {
+export default function Header({
+  setSearchedCocktails,
+  selectedTheme,
+  setSelectedTheme,
+  toggleTheme,
+}) {
   return (
     <StyledBox>
       <Box width="400px" sx={{ width: { xl: '1488px' } }} m="auto">
-        <Navbar setSearchedCocktails={setSearchedCocktails} />
+        <Navbar
+          setSearchedCocktails={setSearchedCocktails}
+          selectedTheme={selectedTheme}
+          setSelectedTheme={setSelectedTheme}
+          toggleTheme={toggleTheme}
+        />
       </Box>
     </StyledBox>
   );

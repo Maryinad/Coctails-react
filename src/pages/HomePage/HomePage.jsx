@@ -18,6 +18,9 @@ export default function HomePage({
   cocktails,
   isOpenModal,
   setCocktails,
+  selectedTheme,
+  setSelectedTheme,
+  toggleTheme,
 }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -63,7 +66,12 @@ export default function HomePage({
 
   return (
     <>
-      <Header setSearchedCocktails={setSearchedCocktails} />
+      <Header
+        setSearchedCocktails={setSearchedCocktails}
+        selectedTheme={selectedTheme}
+        setSelectedTheme={setSelectedTheme}
+        toggleTheme={toggleTheme}
+      />
       <ContainerW>
         <Hero
           setSelectedChar={setSelectedChar}
