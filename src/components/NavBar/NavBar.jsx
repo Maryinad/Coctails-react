@@ -41,7 +41,12 @@ const StyledSwitch = styled(Switch)({
   display: { xs: 'none', sm: 'none', lg: 'block' },
 });
 
-const Navbar = ({ setSearchedCocktails }) => {
+const Navbar = ({
+  setSearchedCocktails,
+  selectedTheme,
+  setSelectedTheme,
+  toggleTheme,
+}) => {
   const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
   const isDefault = useMediaQuery({ query: '(min-width: 768px)' });
 
@@ -90,7 +95,7 @@ const Navbar = ({ setSearchedCocktails }) => {
               display: { xs: 'none', sm: 'none', lg: 'block' },
             }}
           />
-          <StyledSwitch {...label} />
+          <StyledSwitch {...label} onClick={toggleTheme} />
           <DarkModeIcon
             sx={{
               color: '#fd5103',
