@@ -35,16 +35,6 @@ export default function HomePage({
           setCocktails(cocktailsResult);
         }
       } else {
-        // const randomCocktailsResult1 = await getRandomCocktails();
-        // const randomCocktailsResult2 = await getRandomCocktails();
-        // const randomCocktailsResult3 = await getRandomCocktails();
-
-        // setCocktails([
-        //   randomCocktailsResult1[0],
-        //   randomCocktailsResult2[0],
-        //   randomCocktailsResult3[0],
-
-        // ]);
         const randomCocktailsResult = await getRandomCocktailsByLetter('M');
         console.log('randomCocktailsResultM', randomCocktailsResult);
 
