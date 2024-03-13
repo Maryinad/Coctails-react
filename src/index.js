@@ -6,12 +6,14 @@ import { Normalize } from 'styled-normalize';
 import './index.css';
 
 import { BrowserRouter } from 'react-router-dom';
+import { DataContextProvider } from 'context/DataContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <Normalize />
       <GlobalStyle />
+
       <App />
     </BrowserRouter>
   </React.StrictMode>

@@ -62,11 +62,6 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme[selectedTheme]}>
       <main>
-        {/* <nav>
-        <Link to="/">Home</Link>
-        <Link to="/favourite">Favourite</Link>
-      </nav> */}
-
         <Routes>
           <Route
             path="/"
