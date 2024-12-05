@@ -1,12 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
-import styled from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   ${normalize}
-
-  
-
 
 
 *, *: : before, *: : after {
@@ -74,9 +70,7 @@ body {
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: 0.02em;
-  color: #fd5103;
-  background-color: #FCFCFC;
-  fill: #FCFCFC;
+ 
   transition: background-color 0.5s ease, color 0.5s ease, fill 0.5s ease;
 }
 `;

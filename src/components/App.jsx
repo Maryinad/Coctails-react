@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
 import HomePage from '../pages/HomePage/HomePage';
 import FavouritePage from 'pages/FavouritePage/FavouritePage';
@@ -7,7 +8,7 @@ import { ErrorPage } from 'pages/ErrorPage';
 
 import SearchResultPage from 'pages/SearchResultPage';
 import { ThemeProvider } from 'styled-components';
-import { startTransition } from 'react';
+
 import { theme } from 'styles/theme';
 
 export const App = () => {
@@ -17,6 +18,12 @@ export const App = () => {
   const [selectedCoc, setSelectedCoc] = useState({});
   const [cocktails, setCocktails] = useState([]);
   const [selectedTheme, setSelectedTheme] = useState('light');
+
+  // const MainContainer = styled.main`
+  //   background-color: ${props => props.theme.background};
+  //   color: ${props => props.theme.color};
+  //   color: ${props => props.theme.fill};ç
+  // `;
 
   const handleToggleModalOpen = index => {
     const selectedCocktail = cocktails[index];
@@ -81,6 +88,9 @@ export const App = () => {
                 cocktails={cocktails}
                 isOpenModal={isOpenModal}
                 setCocktails={setCocktails}
+                selectedTheme={selectedTheme}
+                setSelectedTheme={setSelectedTheme}
+                toggleTheme={toggleTheme}
               />
             }
           />

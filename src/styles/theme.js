@@ -1,11 +1,13 @@
 export const theme = {
   light: {
-    background: '#fd5103',
+    background: '#FFFFFF',
     color: '#202025',
+    fill: '#fcfcfc',
   },
 
   dark: {
     background: 'black',
     color: '#FCFCFC',
+    fill: 'black',
   },
 };
